@@ -1,0 +1,14 @@
+version: '3.3'
+services:
+    elasticsearch_myplugin:
+        ports:
+            - '9200:9200'
+            - '9300:9300'
+        environment:
+            - discovery.type=single-node
+            - xpack.security.enabled=false
+        image: elasticsearch_myplugin
+    kibana:
+        ports:
+            - '5601:5601'
+        image: kibana:8.10.4

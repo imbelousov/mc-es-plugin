@@ -1,0 +1,57 @@
+buildscript {
+    repositories {
+        maven {
+            url = 'https://snapshots.elastic.co/maven/'
+        }
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.elasticsearch.gradle:build-tools:8.10.4'
+    }
+}
+
+plugins {
+    id 'java-library'
+}
+
+apply plugin: 'elasticsearch.esplugin'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation('junit:junit:4.12') {
+        exclude module: 'hamcrest'
+        exclude module: 'hamcrest-core'
+    }
+    api 'org.apache.commons:commons-math3:3.6.1'
+    implementation 'com.google.guava:guava:32.1.1-jre'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(18)
+    }
+}
+
+esplugin {
+    name 'myplugin'
+    description ''
+    classname 'myplugin.MyPlugin'
+    licenseFile rootProject.file('LICENSE.txt')
+    noticeFile rootProject.file('NOTICE.txt')
+}
+
+test {
+    jvmArgs('-Dtests.security.manager=false')
+}
+
+tasks.register('docker', Copy) {
+    from 'build/distributions/myplugin.zip'
+    into '../docker/'
+}
+
+tasks.named('build') {
+    finalizedBy('docker')
+}
