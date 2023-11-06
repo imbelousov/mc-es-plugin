@@ -13,3 +13,9 @@ cd docker
 docker build . --tag elasticsearch_myplugin
 docker-compose up -d
 ```
+
+### Ссылки
+
+- JDK https://www.oracle.com/java/technologies/javase/jdk18-archive-downloads.html
+- Gradle https://docs.gradle.org/current/userguide/installation.html#ex-installing-manually
+- IntelliJ IDEA Community Edition https://www.jetbrains.com/ru-ru/idea/download/
