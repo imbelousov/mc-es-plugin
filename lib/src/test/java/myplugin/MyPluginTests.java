@@ -32,7 +32,7 @@ public class MyPluginTests extends ESIntegTestCase {
         var response = client()
                 .prepareSearch("my_index")
                 .setQuery(QueryBuilders.matchAllQuery())
-                .setSource(new SearchSourceBuilder().fetchSource(new String[]{"abc"}, null))
+                .setSource(new SearchSourceBuilder().fetchSource(new String[]{"first_field", "my_number"}, null))
                 .execute()
                 .actionGet();
 
